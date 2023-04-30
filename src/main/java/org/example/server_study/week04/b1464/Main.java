@@ -1,4 +1,4 @@
-package org.example.b1464;
+package org.example.server_study.week04.b1464;
 
 /*
 문자열을 입력받고 앞부터 .reverse() 가 가능하다.
