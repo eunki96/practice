@@ -1,4 +1,4 @@
-package aim_to_platinum.backtracking.b10971;
+package aim_to_platinum.week01_backtracking.b10971;
 
 /*
 행렬의 형태로 도시간 이동에 필요한 비용 주어짐 (이차원 행렬 사용)

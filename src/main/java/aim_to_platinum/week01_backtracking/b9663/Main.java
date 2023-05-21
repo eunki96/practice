@@ -1,4 +1,4 @@
-package aim_to_platinum.backtracking.b9663;
+package aim_to_platinum.week01_backtracking.b9663;
 
 /*
 제한시간 10초

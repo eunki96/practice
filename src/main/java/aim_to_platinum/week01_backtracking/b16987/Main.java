@@ -1,4 +1,4 @@
-package aim_to_platinum.backtracking.b16987;
+package aim_to_platinum.week01_backtracking.b16987;
 
 /*
 시간제한 2초로 충분하다고 생각
@@ -10,7 +10,6 @@ maxCount 를 출력하면 된다.
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 class Egg{

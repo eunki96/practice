@@ -1,4 +1,4 @@
-package aim_to_platinum.backtracking.b17136;
+package aim_to_platinum.week01_backtracking.b17136;
 
 /*
 백트래킹, 브루트 포스 문제.
