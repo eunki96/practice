@@ -5,9 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
+
+    static int n;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int n = Integer.parseInt(br.readLine());
+        n = Integer.parseInt(br.readLine());
 
         String board[] = new String[n];
         board[0] = "  *  ";
@@ -18,6 +20,12 @@ public class Main {
             DC(k, board);
         }
         for (int i = 0; i < n; ++i) {
+            System.out.println(board[i]);
+        }
+    }
+
+    static void showBoard(String[] board){
+        for(int i=0; i<n; i++){
             System.out.println(board[i]);
         }
     }
@@ -35,5 +43,7 @@ public class Main {
         for (int i = 0; i < middle; ++i) {
             board[i] = temp + board[i] + temp;
         }
+
+        showBoard(board);
     }
 }
