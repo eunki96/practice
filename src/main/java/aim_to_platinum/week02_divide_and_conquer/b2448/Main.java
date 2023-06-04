@@ -44,6 +44,6 @@ public class Main {
             board[i] = temp + board[i] + temp;
         }
 
-        showBoard(board);
+//        showBoard(board);
     }
 }
