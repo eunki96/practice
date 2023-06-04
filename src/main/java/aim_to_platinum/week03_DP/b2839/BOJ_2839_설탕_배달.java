@@ -1,4 +1,4 @@
-package aim_to_platinum.week03_DP.b2839;
+package aim_to_platinum.week03_DP.BOJ_2839_설탕_배달;
 /*
 1. 문제 요약
 - 사용 가능한 봉지는 5kg, 3kg의 두 종류이다
