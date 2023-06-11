@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+import static java.lang.Math.*;
+
 /*
 https://rebro.kr/64
 2^n X 2^n 크기의 정사각형은 1X1 한 칸을 제외하고 ㄴ 모양의 타일로 전부 채울 수 있다.
@@ -92,7 +94,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer stk;
         int n = Integer.parseInt(br.readLine());
-        N = (int)Math.pow(2, n);
+        N = (int) pow(2, n);
         board = new int[N][N];
 
         stk = new StringTokenizer(br.readLine());
