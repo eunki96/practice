@@ -1,9 +1,5 @@
 package aim_to_platinum.week04_DP2.b12865;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 /*
 1. 문제 요약
@@ -30,6 +26,12 @@ import java.util.StringTokenizer;
 [아이디어-1] -> 이미 담았던 값을 또 담는 문제 발생
             -> 이를 해결하기 위해 담은 T를 체크하는 배열 생성하고 하다보니 코드가 너무 비효율적으로 길어져 원점으로 복귀
  */
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 class T{
     int W, V;
     public T(int W, int V){
