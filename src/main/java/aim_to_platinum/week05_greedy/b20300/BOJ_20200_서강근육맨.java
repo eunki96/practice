@@ -1,11 +1,4 @@
 package aim_to_platinum.week05_greedy.b20300;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
-
 /*
 1. 문제 요약
 - 운동기구 N 개에 대하여 각 기구의 근손실 정도가 주어진다
@@ -35,6 +28,13 @@ import java.util.StringTokenizer;
 3. 어려움 및 해결
 [아이디어-1] ->
  */
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
 public class BOJ_20200_서강근육맨 {
     static int N;
     static long[] loss;
