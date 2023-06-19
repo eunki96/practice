@@ -35,7 +35,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class BOJ_20200_서강근육맨 {
+public class BOJ_20300_서강근육맨 {
     static int N;
     static long[] loss;
 
