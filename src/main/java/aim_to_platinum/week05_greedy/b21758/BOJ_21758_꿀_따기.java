@@ -1,10 +1,5 @@
 package aim_to_platinum.week05_greedy.b21758;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-
 /*
 1. 문제 요약
 - 3 <= N <= 100,000 인 N을 입력받고 크기 N의 배열에 각각 꿀의 양을 입력받아 저장한다
@@ -57,6 +52,12 @@ import java.util.StringTokenizer;
 - 의미없는 경우를 제외하는 과정이 오래걸렸다
     ex) [아이디어-2] 의 3.
  */
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
 public class BOJ_21758_꿀_따기 {
     static int N;
     static int[] arr;
