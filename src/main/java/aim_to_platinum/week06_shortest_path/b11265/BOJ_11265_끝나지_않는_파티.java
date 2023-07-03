@@ -17,7 +17,9 @@ import java.util.StringTokenizer;
 
 2. 아이디어 (문제 접근법)
 [아이디어-1]
--
+- 플로이드 알고리즘 사용하여 모든 정점간 최단 경로 확인
+- 이후 board[from][to] <= weight 일 경우 "Enjoy other party",
+    아닐경우 "Stay here" 출력
 
 3. 어려움 및 해결
 -
