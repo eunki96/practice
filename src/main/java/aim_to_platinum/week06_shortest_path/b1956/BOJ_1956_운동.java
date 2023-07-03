@@ -3,6 +3,7 @@ package aim_to_platinum.week06_shortest_path.b1956;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /*
@@ -17,10 +18,10 @@ import java.util.StringTokenizer;
 
 2. 아이디어 (문제 접근법)
 [아이디어-1]
-- 전체 인접행렬을 10001로 초기화 하고
+- 전체 인접행렬을 INF로 초기화 하고
 - 플로이드 알고리즘으로 전체 도시에 대한 각각의 최소값을 구한 다음
     board[i][i] 들을 순회하며 최소값 찾음
-- 만약 값이 10001 이라면 사이클이 없는 것 이므로 -1 출력
+- 만약 값이 INF 이라면 사이클이 없는 것 이므로 -1 출력
 
 [아이디어-2]
 - 두 마을을 왕복하는 경우까지만 사이클에 포함시키므로,
@@ -31,6 +32,11 @@ import java.util.StringTokenizer;
 - 모든 도시 간 최소 경로를 구한 뒤,
     i->j 와 j->i 경로가 있으면 두 마을을 왕복하는 경우이므로 사이클로 인정
     i == j의 경우는 여전히 무시한다
+    -> 또 틀렸다
+
+[아이디어-3]
+- 다시 정리해봅시다잉.. 부들
+- 큰 틀은 지금까지 플로이드 알고리즘 문제 풀이와 같은데
 
 
 
@@ -39,9 +45,13 @@ import java.util.StringTokenizer;
     계속 생각해봤는데 "도로의 길이의 합이 가장 작은 사이클" 을 구하는 문제이기에
     a->a 의 경우 사이클이 아니므로 제외하고 생각해야 하는건가? 하고 힌트를 보니 맞았음..
     => [아이디어-2]
+- 10001 을 100,000,000 으로 해주니 해결되었다..
 
  */
 public class BOJ_1956_운동 {
+
+    static final long INF = 10000000;
+
     static int V, E;
     static long[][] board;
 
@@ -54,42 +64,46 @@ public class BOJ_1956_운동 {
         E = Integer.parseInt(stk.nextToken());
         board = new long[V][V];
 
+        //인접행렬 초기화
         for(int i=0; i<V; i++) {
-            for(int j=0; j<V; j++){
-                if(i != j) board[i][j] = 10001;
-            }
+            Arrays.fill(board[i], INF);
         }
 
+        //경로 입력
         for(int i=0; i<E; i++){
             stk = new StringTokenizer(br.readLine());
             int from = Integer.parseInt(stk.nextToken()) - 1;
             int to = Integer.parseInt(stk.nextToken()) - 1;
             long weight = Long.parseLong(stk.nextToken());
+
+            if(from == to) continue;
             board[from][to] = weight;
         }
 
+        //플로이드
         for(int k=0; k<V; k++){
             for(int i=0; i<V; i++){
                 for(int j=0; j<V; j++){
-                    if(j == k || i == j || i == k) continue;
-                    if(board[i][k] + board[k][j] < board[i][j]){
+                    if(board[i][j] > board[i][k] + board[k][j]){
                         board[i][j] = board[i][k] + board[k][j];
                     }
                 }
             }
         }
 
-        long min = 10001;
+//        for(int i=0; i<V; i++){
+//            for(int j=0; j<V; j++){
+//                System.out.print(board[i][j] + " ");
+//            }
+//            System.out.println();
+//        }
+
+        long min = Long.MAX_VALUE;
         for(int i=0; i<V; i++){
-            for(int j=0; j<V; j++){
-                if(i == j) continue;
-                if(board[i][j] != 10001 && board[j][i] != 10001){
-                    min = Math.min(min, board[i][j] + board[j][i]);
-                }
-            }
+            min = Math.min(min, board[i][i]);
         }
 
-        if(min == 10001) System.out.println(-1);
+        if(min == INF) System.out.println(-1);
         else System.out.println(min);
     }
 }
