@@ -12,11 +12,11 @@ package aim_to_platinum.week07_tree.b3584;
 
 2. 아이디어 (문제 접근법)
 [아이디어-1]
-[1] - 각 index 부모 노드를 기록해놓은 int[N+1] 배열 parent 를 생성한다
-[2] - A의 부모 노드를 기록해 놓을 boolean[N+1] 배열 isParent 를 생성한다
+- 각 index 부모 노드를 기록해놓은 int[N+1] 배열 parent 를 생성한다
+- A의 부모 노드를 기록해 놓을 boolean[N+1] 배열 isParent 를 생성한다
     parent[A] 를 시작으로
     root 노드에 도달할 때까지 isParent 를 true 로 업데이트 한다
-[3] - parent[B]를 시작으로
+- parent[B]를 시작으로
     root 노드에 도달 할 때까지 isParent 를 순회한다
         그 과정에서 isParent 값을 true 로 갖는 index를 만나면
         해당 index가 가장 가까운 공통 조상이 된다
@@ -24,7 +24,6 @@ package aim_to_platinum.week07_tree.b3584;
 
 3. 어려움 및 해결
 - 답은 맞게 나오는데 시간 초과가 발생한다
-- [2], [3] 부분을 단순화 하니 바로 시간초과가 해결되었다
 
  */
 
@@ -34,7 +33,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BOJ_3584_가장_가까운_공통_조상 {
+public class BOJ_3584_가장_가까운_공통_조상_2 {
 
     static StringBuffer sb = new StringBuffer();
 
@@ -62,24 +61,18 @@ public class BOJ_3584_가장_가까운_공통_조상 {
             int A = Integer.parseInt(stk.nextToken());
             int B = Integer.parseInt(stk.nextToken());
 
-            isParent[A] = true;
-            int start = A;
-            int parentNo;
             while(true){
-                parentNo = parent[start];
-                if(parentNo == 0) break;
-                isParent[parentNo] = true;
-                start = parentNo;
+                if(A == 0) break;
+                isParent[A] = true;
+                A = parent[A];
             }
 
-            start = B;
             while(true){
-                parentNo = parent[start];
-                if(isParent[parentNo]) {
-                    sb.append(parentNo).append("\n");
+                if(isParent[B]){
+                    sb.append(B).append("\n");
                     break;
                 }
-                start = parentNo;
+                B = parent[B];
             }
         }
 
