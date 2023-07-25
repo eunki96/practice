@@ -1,14 +1,5 @@
 package aim_to_platinum.week08_review.b1238;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
-
 /*
 1. 문제 요약
 - 각 마을당 한 명의 학생들이 있다
@@ -37,6 +28,15 @@ import java.util.StringTokenizer;
 -
  */
 
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
 class Town implements Comparable<Town>{
     int number;
     int weight;
@@ -54,26 +54,30 @@ public class BOJ_1238_파티 {
 
     static int student, load, party;
 
-    static int[] Dijkstra(int start, ArrayList<ArrayList<Town>> temp){
-        int[] dist = new int[student + 1];
-        Arrays.fill(dist, Integer.MAX_VALUE);
+    static int[] Dijkstra(ArrayList<ArrayList<Town>> temp){
+        PriorityQueue<Town> pq = new PriorityQueue<>();
+        pq.offer(new Town(party, 0));
+
         boolean[] isVisited = new boolean[student + 1];
         Arrays.fill(isVisited, false);
 
-        PriorityQueue<Town> pq = new PriorityQueue<>();
-        pq.offer(new Town(start, 0));
+        int[] dist = new int[student + 1];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[party] = 0;
+
         while(!pq.isEmpty()){
             Town now = pq.poll();
             int nowNumber = now.number;
 
-            dist[nowNumber] = 0;
+            if(isVisited[nowNumber]){
+                continue;
+            }
             isVisited[nowNumber] = true;
 
             for(Town t : temp.get(nowNumber)){
-                if(!isVisited[t.number] && dist[t.number] > dist[nowNumber] + now.weight){
-                    dist[t.number] = dist[nowNumber] + now.weight;
-                    isVisited[t.number] = true;
-                    pq.offer(new Town(t.number, t.weight));
+                if(!isVisited[t.number] && dist[t.number] > dist[nowNumber] + t.weight){
+                    dist[t.number] = dist[nowNumber] + t.weight;
+                    pq.offer(new Town(t.number, dist[t.number]));
                 }
             }
         }
@@ -96,20 +100,19 @@ public class BOJ_1238_파티 {
             list.add(new ArrayList<>());
             reverseList.add(new ArrayList<>());
         }
-        int[] minDist;
-        int[] reverseMinDist;
 
         for(int i=0; i<load; i++){
             stk = new StringTokenizer(br.readLine());
             int from = Integer.parseInt(stk.nextToken());
             int to = Integer.parseInt(stk.nextToken());
             int time = Integer.parseInt(stk.nextToken());
+
             list.get(from).add(new Town(to, time));
             reverseList.get(to).add(new Town(from, time));
         }
 
-        minDist = Dijkstra(party, list);
-        reverseMinDist = Dijkstra(party, reverseList);
+        int[] minDist = Dijkstra(list);
+        int[] reverseMinDist = Dijkstra(reverseList);
 
         int answer = Integer.MIN_VALUE;
         for(int i=0; i<=student; i++){
