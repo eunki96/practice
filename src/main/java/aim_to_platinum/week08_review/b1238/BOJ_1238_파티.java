@@ -65,18 +65,20 @@ public class BOJ_1238_파티 {
         while(!pq.isEmpty()){
             Town now = pq.poll();
             int nowNumber = now.number;
+
             dist[nowNumber] = 0;
             isVisited[nowNumber] = true;
+
             for(Town t : temp.get(nowNumber)){
                 if(!isVisited[t.number] && dist[t.number] > dist[nowNumber] + now.weight){
                     dist[t.number] = dist[nowNumber] + now.weight;
-                    isVisited[t.number] = true
+                    isVisited[t.number] = true;
+                    pq.offer(new Town(t.number, t.weight));
                 }
             }
         }
 
-
-        return null;
+        return dist;
     }
 
     public static void main(String[] args) throws IOException {
@@ -90,6 +92,10 @@ public class BOJ_1238_파티 {
 
         ArrayList<ArrayList<Town>> list = new ArrayList<>();
         ArrayList<ArrayList<Town>> reverseList = new ArrayList<>();
+        for(int i=0; i<=student; i++){
+            list.add(new ArrayList<>());
+            reverseList.add(new ArrayList<>());
+        }
         int[] minDist;
         int[] reverseMinDist;
 
@@ -109,5 +115,8 @@ public class BOJ_1238_파티 {
         for(int i=0; i<=student; i++){
             answer = Math.max(answer, minDist[i] + reverseMinDist[i]);
         }
+
+        int ans = (answer == Integer.MIN_VALUE ? -1 : answer);
+        System.out.println(ans);
     }
 }
