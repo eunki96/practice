@@ -32,12 +32,16 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-class City{
+class City implements Comparable<City>{
     int number;
     int weight;
     public City(int number, int weight){
         this.number = number;
         this.weight = weight;
+    }
+    @Override
+    public int compareTo(City city){
+        return this.weight - city.weight;
     }
 }
 public class BOJ_18352_특정_거리의_도시_찾기 {
@@ -46,15 +50,14 @@ public class BOJ_18352_특정_거리의_도시_찾기 {
     static int range;
     static int startNode;
 
-    static ArrayList<ArrayList<City>> list;
+    static ArrayList<ArrayList<City>> list = new ArrayList<>();
     static boolean[] isVisited;
     static int[] minDist;
 
-    static void dijkstra(){
+    static void dijkstra(int startNum){
         PriorityQueue<City> pq = new PriorityQueue<>();
-        isVisited[startNode] = true;
-        minDist[startNode] = 0;
-        pq.offer(new City(startNode, 0));
+        minDist[startNum] = 0;
+        pq.offer(new City(startNum, 0));
 
         while(!pq.isEmpty()){
             City newCity = pq.poll();
@@ -64,7 +67,7 @@ public class BOJ_18352_특정_거리의_도시_찾기 {
 
                 for(City c : list.get(newNumber)){
                     if(!isVisited[c.number] && minDist[c.number] > minDist[newNumber] + 1){
-                        minDist[c.number] = minDist[newNumber] + c.weight;
+                        minDist[c.number] = minDist[newNumber] + 1;
                         pq.offer(new City(c.number, minDist[c.number]));
                     }
                 }
@@ -77,7 +80,6 @@ public class BOJ_18352_특정_거리의_도시_찾기 {
         StringTokenizer stk;
 
         stk = new StringTokenizer(br.readLine());
-
         node = Integer.parseInt(stk.nextToken());
         isVisited = new boolean[node+1];
         minDist = new int[node+1];
@@ -85,11 +87,8 @@ public class BOJ_18352_특정_거리의_도시_찾기 {
         for(int i=0; i<=node; i++){
             list.add(new ArrayList<>());
         }
-
         edge = Integer.parseInt(stk.nextToken());
-
         range = Integer.parseInt(stk.nextToken());
-
         startNode = Integer.parseInt(stk.nextToken());
 
         for(int i=0; i<edge; i++){
@@ -99,13 +98,19 @@ public class BOJ_18352_특정_거리의_도시_찾기 {
             list.get(from).add(new City(to, 1));
         }
 
-        dijkstra();
+        dijkstra(startNode);
 
-        StringBuffer sb;
-        for(int i=1; i<=node; i++){
+        StringBuffer sb = new StringBuffer();
+        for(int i=1; i<minDist.length; i++){
             if(minDist[i] == range){
-
+                sb.append(i).append("\n");
             }
+        }
+
+        if(sb.length() == 0){
+            System.out.println(-1);
+        }else{
+            System.out.println(sb);
         }
     }
 }
