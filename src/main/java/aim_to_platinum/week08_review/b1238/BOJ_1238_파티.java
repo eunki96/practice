@@ -53,14 +53,61 @@ class Town implements Comparable<Town>{
 public class BOJ_1238_파티 {
 
     static int student, load, party;
-    static ArrayList<ArrayList<Town>> list;
-    static ArrayList<ArrayList<Town>> reverseList;
 
-    static int[] Dijkstra(){
+    static int[] Dijkstra(int start, ArrayList<ArrayList<Town>> temp){
+        int[] dist = new int[student + 1];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        boolean[] isVisited = new boolean[student + 1];
+        Arrays.fill(isVisited, false);
+
+        PriorityQueue<Town> pq = new PriorityQueue<>();
+        pq.offer(new Town(start, 0));
+        while(!pq.isEmpty()){
+            Town now = pq.poll();
+            int nowNumber = now.number;
+            dist[nowNumber] = 0;
+            isVisited[nowNumber] = true;
+            for(Town t : temp.get(nowNumber)){
+                if(!isVisited[t.number] && dist[t.number] > dist[nowNumber] + now.weight){
+                    dist[t.number] = dist[nowNumber] + now.weight;
+                    isVisited[t.number] = true
+                }
+            }
+        }
+
+
         return null;
     }
 
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer stk;
 
+        stk = new StringTokenizer(br.readLine());
+        student = Integer.parseInt(stk.nextToken());
+        load = Integer.parseInt(stk.nextToken());
+        party = Integer.parseInt(stk.nextToken());
+
+        ArrayList<ArrayList<Town>> list = new ArrayList<>();
+        ArrayList<ArrayList<Town>> reverseList = new ArrayList<>();
+        int[] minDist;
+        int[] reverseMinDist;
+
+        for(int i=0; i<load; i++){
+            stk = new StringTokenizer(br.readLine());
+            int from = Integer.parseInt(stk.nextToken());
+            int to = Integer.parseInt(stk.nextToken());
+            int time = Integer.parseInt(stk.nextToken());
+            list.get(from).add(new Town(to, time));
+            reverseList.get(to).add(new Town(from, time));
+        }
+
+        minDist = Dijkstra(party, list);
+        reverseMinDist = Dijkstra(party, reverseList);
+
+        int answer = Integer.MIN_VALUE;
+        for(int i=0; i<=student; i++){
+            answer = Math.max(answer, minDist[i] + reverseMinDist[i]);
+        }
     }
 }
