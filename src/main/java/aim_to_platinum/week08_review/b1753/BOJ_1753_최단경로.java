@@ -1,12 +1,5 @@
 package aim_to_platinum.week08_review.b1753;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.StringTokenizer;
 
 /*
 1. 문제 요약
@@ -21,6 +14,12 @@ import java.util.StringTokenizer;
 3. 어려움 및 해결
 -
  */
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
 class Node implements Comparable<Node>{
     int number;
     int weight;
@@ -41,6 +40,7 @@ public class BOJ_1753_최단경로 {
     static void Dijkstra(){
         PriorityQueue<Node> pq = new PriorityQueue<>();
         pq.add(new Node(start, 0));
+        minDist[start] = 0;
 
         while(!pq.isEmpty()){
             Node now = pq.poll();
@@ -62,6 +62,7 @@ public class BOJ_1753_최단경로 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer stk;
 
         stk = new StringTokenizer(br.readLine());
@@ -92,13 +93,16 @@ public class BOJ_1753_최단경로 {
             int temp = minDist[i];
             if(temp == Integer.MAX_VALUE){
                 sb.append("INF").append("\n");
-            }else if(temp == start){
-                sb.append("0").append("\n");
             }else{
                 sb.append(temp).append("\n");
+
             }
         }
 
-        System.out.println(sb.toString());
+        sb.deleteCharAt(sb.lastIndexOf("\n"));
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+        br.close();
     }
 }
