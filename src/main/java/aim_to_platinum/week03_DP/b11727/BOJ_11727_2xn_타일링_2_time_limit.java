@@ -21,16 +21,12 @@ public class BOJ_11727_2xn_타일링_2_time_limit {
 
     static void DFS(int now, int count){
         if(now>N) {
-//            System.out.println();
             return;
         }
         if(now==N){
             answer += Math.pow(2, count);
-//            System.out.println( " --- 완료 " + answer);
         }
-//        System.out.print("1 ");
         DFS(now+1, count);
-//        System.out.print("2 ");
         DFS(now+2, count+1);
     }
 

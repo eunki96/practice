@@ -30,15 +30,6 @@ public class BOJ_11055_가장_큰_증가하는_부분_수열 {
     static int[] check;
     static int N;
 
-//    static void showArr(){
-//        for(int x : arr) System.out.print(x + " ");
-//        System.out.println();
-//    }
-//    static void showCheck(){
-//        for(int x : check) System.out.print(x + " ");
-//        System.out.println();
-//    }
-
     static void DP(int i){
         int max = 0;
         for(int j = 0; j<i; j++){
@@ -62,8 +53,7 @@ public class BOJ_11055_가장_큰_증가하는_부분_수열 {
         }
 
         check[0] = arr[0];
-//        showArr();
-//        showCheck();
+
         for(int i=1; i<N; i++){
             DP(i);
         }

@@ -76,16 +76,6 @@ public class BOJ_5557_1학년 {
                 }
             }
         }
-
-//        for(int i=0; i<N-1; i++){
-//            for(int j=0; j<=20; j++){
-//                System.out.print(DP[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//
-//        System.out.println();
-
         System.out.println(DP[N-2][arr[N-1]]);
     }
 }

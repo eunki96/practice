@@ -40,23 +40,6 @@ public class Main {
         }
         return true;
     }
-//
-//    static void test1(int xFrom, int xTo, int yFrom, int yTo){
-//        for(int i=xFrom; i<=xTo; i++){
-//            for(int j=yFrom; j<=yTo; j++){
-//                board[i][j] = 9;
-//            }
-//        }
-//    }
-//
-//    static void test2(){
-//        for(int i=0; i<N; i++){
-//            for(int j=0; j<N; j++){
-//                System.out.print(board[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//    }
 
     static void DC(int xFrom, int xTo, int yFrom, int yTo){
         if(checkColor(xFrom, xTo, yFrom, yTo)){
@@ -65,10 +48,6 @@ public class Main {
             }else{
                 blueCount++;
             }
-
-//            test1(xFrom, xTo, yFrom, yTo);
-//            test2();
-
         }else{
             DC(xFrom, (xTo+xFrom)/2, yFrom, (yTo+yFrom)/2);
             DC(xFrom, (xTo+xFrom)/2, (yTo+yFrom)/2+1, yTo);

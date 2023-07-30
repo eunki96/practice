@@ -24,12 +24,6 @@ public class Main {
         }
     }
 
-    static void showBoard(String[] board){
-        for(int i=0; i<n; i++){
-            System.out.println(board[i]);
-        }
-    }
-
     private static void DC(int k, String board[]) {
         int bottom = 3 * (int)Math.pow(2, k);
         int middle = bottom / 2;
@@ -43,7 +37,5 @@ public class Main {
         for (int i = 0; i < middle; ++i) {
             board[i] = temp + board[i] + temp;
         }
-
-//        showBoard(board);
     }
 }

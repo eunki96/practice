@@ -68,10 +68,6 @@ public class BOJ_12865_평범한_배낭 {
             for (int j = K; j-w >= 0; j--) {
                 maxValue[j] = Math.max(maxValue[j], maxValue[j-w] + v);
             }
-//            for(int j=1; j<=K; j++){
-//                if(j-w<0) continue;
-//                maxValue[j] = Math.max(maxValue[j], maxValue[j-w]+v);
-//            }
         }
 
         System.out.println(maxValue[K]);
