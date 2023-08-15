@@ -26,10 +26,6 @@ package aim_to_platinum.week09_binary_tree.b2805;
     자른 나무의 합이 M 이상을 만족하게 될 때
     - M 을 answer 에 저장한다
 
-
-
-
-
 3. 어려움 및 해결
 -
  */
