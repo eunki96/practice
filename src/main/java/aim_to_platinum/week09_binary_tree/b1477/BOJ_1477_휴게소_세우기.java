@@ -64,9 +64,11 @@ public class BOJ_1477_휴게소_세우기 {
         }
         Collections.sort(list);
 
-        int min = 0;
+//        int min = 0;
+        int min = 1;
         int mid;
-        int max = L;
+//        int max = L;
+        int max = L - 1;
         while(min < max){
             mid = (min + max) / 2;
             if(solution(mid, M, list)){
