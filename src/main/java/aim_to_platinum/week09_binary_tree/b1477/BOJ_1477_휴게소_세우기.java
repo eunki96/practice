@@ -13,18 +13,29 @@ package aim_to_platinum.week09_binary_tree.b1477;
 2. 아이디어 (문제 접근법)
 [아이디어-1]
 - 휴게소를 짓고자 하는 구간을 찾는 문제이다
-    이 때 지어야 하는 휴게소가
+    입력받은 휴게소 위치를 정렬한 후
+    아래와 같이 휴게소가 없는 구간의 거리에 초점을 맞춰 이분탐색을 시도하면 된다
+    이 때 새로 짓고자 하는 휴게소가 M개 인데,
+    각 휴게소 간 거리를 휴게소가 없는 구간의 거리로 나누고
+    이들의 총 합을 구하여 M과 비교한다
+    1. M보다 더 많을 경우
+        - 휴게소가 없는 구간의 거리를 늘인다
+            min = mid + 1;
+    2. M보다 적을 경우
+        - 휴게소가 없는 구간의 거리를 줄인다
+            max = mid;
 
 
 3. 어려움 및 해결
--
+- int min = 0; -> 이 부분에서 런타임 에러 (/ by zero) 가 발생했다
+    어차피 도로의 시작으로부터 거리가 0인 경우는 고려할 필요 없으니
+    min = 1 로 시작하니 해결되었다
  */
 
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.StringTokenizer;
 
 public class BOJ_1477_휴게소_세우기 {
@@ -64,10 +75,9 @@ public class BOJ_1477_휴게소_세우기 {
         }
         Collections.sort(list);
 
-//        int min = 0;
+//        int min = 0; ->
         int min = 1;
         int mid;
-//        int max = L;
         int max = L - 1;
         while(min < max){
             mid = (min + max) / 2;
