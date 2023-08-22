@@ -45,7 +45,7 @@ class City implements Comparable<City>{
     }
 }
 public class BOJ_18352_특정_거리의_도시_찾기 {
-    static int node;
+    static int node; 
     static int edge;
     static int range;
     static int startNode;
