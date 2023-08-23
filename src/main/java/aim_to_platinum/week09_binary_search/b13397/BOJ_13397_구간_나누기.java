@@ -48,7 +48,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 
-public class BOJ_구간_나누기 {
+public class BOJ_13397_구간_나누기 {
 
     static boolean solution(int mid, int[] arr, int M){
         int count = 1;
