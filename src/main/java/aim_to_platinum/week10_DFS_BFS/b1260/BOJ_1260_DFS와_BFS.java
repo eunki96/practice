@@ -1,8 +1,5 @@
 package aim_to_platinum.week10_DFS_BFS.b1260;
 
-import java.io.*;
-import java.util.*;
-
 /*
 1. 문제 요약
 -
@@ -16,6 +13,10 @@ import java.util.*;
 3. 어려움 및 해결
 -
 */
+
+import java.io.*;
+import java.util.*;
+
 public class BOJ_1260_DFS와_BFS {
 
     static int node, edge, start;
