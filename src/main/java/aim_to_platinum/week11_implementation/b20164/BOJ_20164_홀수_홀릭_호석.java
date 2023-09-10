@@ -1,4 +1,6 @@
 package aim_to_platinum.week11_implementation.b20164;
+
+
 /*
 1. 문제 요약
 - 숫자 N(1 ≤ N ≤ 10^9-1)이 주어졌을 때
@@ -14,17 +16,124 @@ package aim_to_platinum.week11_implementation.b20164;
 [아이디어-1]
 - 우선 전부 해보는 방법 (브루트 포스)
 - 숫자를 입력받고 다음의 cut 메서드에 입력한다
+    - 홀수의 개수를 세는 getOdd() 메서드 실행, 홀수 만날 때마다 count++
     - point1 과 point2 가 있다고 하자
         이 때 각 point 가 가리키는 곳은 쪼개는 위치가 된다
-        따라서 point1 과 point2 는 0과 K(쪼개고자 하는 수의 자릿수)가 될 수 없다
         point1 은 for( 1 ~ K-2 ) 범위
-            point2 는 for( 2 ~ K-1 ) 범위
-- String 숫자를 받으면 int 값으로 바꿔주는 메서드
-- int 값을 받으면 String 값으로 바꿔주는 메서드
+            point2 는 for( point1 + 1 ~ K-1 ) 범위
+    - 쪼갠 숫자를 합쳐서 새로운 cut 에 넣는다
+- 값을 비교하는 메서드를 사용해 최대값과 최소값을 업데이트 한다
 
 
 3. 어려움 및 해결
--
+- 홀수를 세는 작업을 String 으로 처리하려는 실수를 했다
+- 전
+        System.out.println("[getOdd]");
+        for(char c : value.toCharArray()){
+            if(c - '0' % 2 == 1){
+                count++;
+            }
+        }
+- 후
+        int intValue = Integer.parseInt(value);
+        while(intValue > 0){
+            if(intValue % 10 % 2 == 1){
+                count++;
+            }
+            intValue /= 10;
+        }
 */
+
+
+import java.io.*;
+
 public class BOJ_20164_홀수_홀릭_호석 {
+    static int[] answers = {Integer.MAX_VALUE, Integer.MIN_VALUE};
+    public static void update(int count){
+//        System.out.println("[update]");
+//        System.out.println("전 : " + answers[0] + " " + answers[1]);
+        answers[0] = Math.min(count, answers[0]);
+        answers[1] = Math.max(count, answers[1]);
+//        System.out.println("후 : " + answers[0] + " " + answers[1]);
+
+    }
+    public static int getOdd(String value, int count){
+//        System.out.println("[getOdd]");
+//        for(char c : value.toCharArray()){
+//            if(c - '0' % 2 == 1){
+//                count++;
+//            }
+//        }
+        int intValue = Integer.parseInt(value);
+        while(intValue > 0){
+            if(intValue % 10 % 2 == 1){
+                count++;
+            }
+            intValue /= 10;
+        }
+
+//        System.out.println("반환 : " + count);
+        return count;
+    }
+    public static void cut(String now, int count){
+//        System.out.printf("\n\n======= [cut] now : %s, count : %d =======\n", now, count);
+
+        //현재 숫자에서 홀수 체크, 업데이트
+        int newCount = getOdd(now, count);
+//        System.out.println("현재 count : " + newCount);
+
+        //한 자리 숫자면 최소값, 최대값 업데이트
+        if(Integer.parseInt(now) < 10){
+//            System.out.println("한 자리 숫자 " + now);
+            update(newCount);
+        }
+        //두 자리 숫자면 각 자리 더해서 cut
+        else if(Integer.parseInt(now) < 100){
+//            System.out.println("두 자리 숫자 " + now);
+            int a1 = Integer.parseInt(now) / 10;
+            int a2 = Integer.parseInt(now) % 10;
+            int newValue = (Integer.parseInt(now) / 10)  + (Integer.parseInt(now) % 10);
+//            System.out.println("cut 진입" + newValue);
+            cut(Integer.toString(newValue), newCount);
+        }
+        //세 자리 이상이면 세 부분으로 나눠서 더한 후, cut
+        else{
+//            System.out.println("세 자리 숫자 " + now);
+            int[] arr = new int[3];
+            for(int i = 1; i <= now.length() - 2; i++){
+                for(int j = i + 1; j <= now.length() - 1; j++){
+//                    System.out.println("cut 지점 : " + i + " " + j);
+                    arr[0] = Integer.parseInt(now.substring(0, i)); // 0 ~ i - 1
+                    arr[1] = Integer.parseInt(now.substring(i, j)); //i ~ j - 1
+                    arr[2] = Integer.parseInt(now.substring(j)); //j ~ length()
+
+                    int newValue = 0;
+                    for(int value : arr){
+//                        System.out.print(value + " ");
+                        newValue += value;
+                    }
+//                    System.out.println("\ncut 진입 " + newValue);
+                    cut(Integer.toString(newValue), newCount);
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
+
+        String first = br.readLine();
+
+        cut(first, 0);
+
+//        System.out.println(answers[0] + " " + answers[1]);
+        sb.append(answers[0]).append(" ").append(answers[1]);
+        bw.write(sb.toString());
+        bw.flush();
+
+        bw.close();
+        br.close();
+    }
 }
