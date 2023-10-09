@@ -43,16 +43,12 @@ public class BOJ_20546_기적의_매매법 {
     static int stockPrice;
 
     static Investor BNP(Investor joonhyeon){
-//        System.out.println("[BNP]");
         int newStock = joonhyeon.money / stockPrice;
         joonhyeon.stock += newStock;
         joonhyeon.money -= newStock * stockPrice;
-//        System.out.printf("joon stock : %d\njoon money : %d\n\n",
-//                joonhyeon.stock, joonhyeon.money);
         return joonhyeon;
     }
     static Investor TIMING(Investor sungmin){
-//        System.out.println("[TIMING]");
         if(dayCount >= 3){
             if(stockPriceArr[dayCount] > stockPriceArr[dayCount - 1] && stockPriceArr[dayCount - 1] > stockPriceArr[dayCount - 2] && stockPriceArr[dayCount - 2] > stockPriceArr[dayCount - 3]){
                 sungmin.money += sungmin.stock * stockPrice;
@@ -63,8 +59,6 @@ public class BOJ_20546_기적의_매매법 {
                 sungmin.money -= newStock * stockPrice;
             }
         }
-//        System.out.printf("sung stock : %d\nsung money : %d\n\n",
-//                sungmin.stock, sungmin.money);
         return sungmin;
     }
 
@@ -82,13 +76,10 @@ public class BOJ_20546_기적의_매매법 {
 
         Investor joonhyeon = new Investor(budget, 0);
         Investor sungmin = new Investor(budget, 0);
-//        System.out.printf("joon : %d\nsung : %d\n\n\n", joonhyeon.money, sungmin.money);
 
         while(DATE-- > 0){
             dayCount++;
             stockPrice = stockPriceArr[dayCount];
-//            System.out.printf("=======DATE : %d=======  stockPrice : %d\ndayCount : %d\n\n",
-//                    DATE, stockPrice, dayCount);
 
             joonhyeon = BNP(joonhyeon);
             sungmin = TIMING(sungmin);
@@ -96,9 +87,6 @@ public class BOJ_20546_기적의_매매법 {
 
         int joonhyeonMoney = joonhyeon.stock * stockPrice + joonhyeon.money;
         int sungminMoney = sungmin.stock * stockPrice + sungmin.money;
-
-//        System.out.println("joon : " + joonhyeonMoney);
-//        System.out.println("sung : " + sungminMoney);
 
         if(joonhyeonMoney == sungminMoney){
             System.out.println("SAMESAME");
