@@ -58,12 +58,7 @@ public class BOJ_20164_홀수_홀릭_호석 {
 
     }
     public static int getOdd(String value, int count){
-//        System.out.println("[getOdd]");
-//        for(char c : value.toCharArray()){
-//            if(c - '0' % 2 == 1){
-//                count++;
-//            }
-//        }
+
         int intValue = Integer.parseInt(value);
         while(intValue > 0){
             if(intValue % 10 % 2 == 1){
@@ -72,47 +67,37 @@ public class BOJ_20164_홀수_홀릭_호석 {
             intValue /= 10;
         }
 
-//        System.out.println("반환 : " + count);
         return count;
     }
     public static void cut(String now, int count){
-//        System.out.printf("\n\n======= [cut] now : %s, count : %d =======\n", now, count);
 
         //현재 숫자에서 홀수 체크, 업데이트
         int newCount = getOdd(now, count);
-//        System.out.println("현재 count : " + newCount);
 
         //한 자리 숫자면 최소값, 최대값 업데이트
         if(Integer.parseInt(now) < 10){
-//            System.out.println("한 자리 숫자 " + now);
             update(newCount);
         }
         //두 자리 숫자면 각 자리 더해서 cut
         else if(Integer.parseInt(now) < 100){
-//            System.out.println("두 자리 숫자 " + now);
             int a1 = Integer.parseInt(now) / 10;
             int a2 = Integer.parseInt(now) % 10;
             int newValue = (Integer.parseInt(now) / 10)  + (Integer.parseInt(now) % 10);
-//            System.out.println("cut 진입" + newValue);
             cut(Integer.toString(newValue), newCount);
         }
         //세 자리 이상이면 세 부분으로 나눠서 더한 후, cut
         else{
-//            System.out.println("세 자리 숫자 " + now);
             int[] arr = new int[3];
             for(int i = 1; i <= now.length() - 2; i++){
                 for(int j = i + 1; j <= now.length() - 1; j++){
-//                    System.out.println("cut 지점 : " + i + " " + j);
                     arr[0] = Integer.parseInt(now.substring(0, i)); // 0 ~ i - 1
                     arr[1] = Integer.parseInt(now.substring(i, j)); //i ~ j - 1
                     arr[2] = Integer.parseInt(now.substring(j)); //j ~ length()
 
                     int newValue = 0;
                     for(int value : arr){
-//                        System.out.print(value + " ");
                         newValue += value;
                     }
-//                    System.out.println("\ncut 진입 " + newValue);
                     cut(Integer.toString(newValue), newCount);
                 }
             }
@@ -128,7 +113,6 @@ public class BOJ_20164_홀수_홀릭_호석 {
 
         cut(first, 0);
 
-//        System.out.println(answers[0] + " " + answers[1]);
         sb.append(answers[0]).append(" ").append(answers[1]);
         bw.write(sb.toString());
         bw.flush();
