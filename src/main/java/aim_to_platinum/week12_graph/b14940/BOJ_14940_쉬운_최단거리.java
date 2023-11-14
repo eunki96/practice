@@ -28,7 +28,6 @@ import java.io.*;
 
 public class BOJ_14940_쉬운_최단거리 {
     static int n, m, I, J;
-    static int level = 0;
     static int[] dx = {1, 0, -1, 0};
     static int[] dy = {0, 1, 0, -1};
 
@@ -104,3 +103,4 @@ public class BOJ_14940_쉬운_최단거리 {
         br.close();
     }
 }
+
